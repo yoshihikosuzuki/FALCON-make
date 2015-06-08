@@ -1,22 +1,21 @@
 # FALCON-make
 This is one way to install the FALCON packages from a FALCON-workspace.
 
+* For simplicity, run this via FALCON-integrate. (See https://github.com/pb-cdunn/FALCON-integrate for details.)
+* You can set `FALCON_PREFIX` and/or `FALCON_WORKSPACE` if you want, but the defaults will work.
+* You can use this package directly if you follow these directions.
+
 ## Set-up
-We have some rules to get you started, but you might need to set that up yourself.
-You can set `FALCON_PREFIX` and/or `FALCON_WORKSPACE` if you want, but the defaults will work.
-```
-git clone git://github.com/pb-cdunn/FALCON-install.git
-git clone git://github.com/pb-cdunn/FALCON-workspace.git
-cd FALCON-install
 
-make pre
+* You will need an active **virtualenv**.
 
-make virtualenv
 ```
-If you want, activate the virtualenv. (Or let our makefile wrapper handle that for you.)
-```
+export FALCON_PREFIX=../fc_env
+mkdir -p ${FALCON_PREFIX}
+virtualenv -p $(shell which python2.7) --no-site-packages  --always-copy ${FALCON_PREFIX}
 . ${FALCON_PREFIX}/bin/activate
 ```
+
 ## Build and install
 Parallel builds should work fine.
 ```
