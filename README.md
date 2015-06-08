@@ -1,20 +1,26 @@
 # FALCON-make
 This is one way to install the FALCON packages from a FALCON-workspace.
 
-## Usage
-We recommend using `virtualenv`.
-```
-export FALCON_PREFIX=${PWD}/fc_env
-virtualenv --no-site-packages  --always-copy   ${FALCON_PREFIX}
-. ${FALCON_PREFIX}/bin/activate
-```
-Then, install everything there.
+## Set-up
+We have some rules to get you started, but you might need to set that up yourself.
+You can set `FALCON_PREFIX` and/or `FALCON_WORKSPACE` if you want, but the defaults will work.
 ```
 git clone git://github.com/pb-cdunn/FALCON-install.git
 git clone git://github.com/pb-cdunn/FALCON-workspace.git
-export FALCON_WORKSPACE=${PWD}/FALCON-workspace
 cd FALCON-install
-make
+
+make pre
+
+make virtualenv
+```
+If you want, activate the virtualenv. (Or let our makefile wrapper handle that for you.)
+```
+. ${FALCON_PREFIX}/bin/activate
+```
+## Build and install
+Parallel builds should work fine.
+```
+make -j
 ```
 After that, you can re-make at any time. The latest build will be in your `$PATH`.
 
