@@ -1,3 +1,5 @@
+FALCON_WORKSPACE?=../FALCON_WORKSPACE
+FALCON_PREFIX?=../fc_env
 VDIR:=${FALCON_PREFIX}
 
 install: install-DAZZ_DB install-DALIGNER install-pypeFLOW install-FALCON
