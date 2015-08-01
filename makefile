@@ -14,7 +14,7 @@ install: build
 build: build-DAZZ_DB build-DALIGNER build-FALCON build-pypeFLOW
 build-DAZZ_DB:
 	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB
-build-DALIGNER:
+build-DALIGNER: build-DAZZ_DB
 	${MAKE} -C ${FALCON_WORKSPACE}/DALIGNER
 build-FALCON:
 	cd ${FALCON_WORKSPACE}/FALCON; python setup.py build
