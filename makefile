@@ -24,6 +24,19 @@ build-FALCON:
 	cd ${FALCON_WORKSPACE}/FALCON; python setup.py build
 build-pypeFLOW:
 	cd ${FALCON_WORKSPACE}/pypeFLOW; python setup.py build
+develop: build-DAZZ_DB build-DALIGNER
+	${MAKE} symlink
+	cd ${FALCON_WORKSPACE}/pypeFLOW; python setup.py develop
+	${MAKE} install-FALCON
+	cd ${FALCON_WORKSPACE}/pbcommand; pip install -e .
+	cd ${FALCON_WORKSPACE}/pbsmrtpipe; pip install -e .
+	cd ${FALCON_WORKSPACE}/FALCON-pbsmrtpipe; python setup.py develop
+bootstrap:
+	pip install --upgrade pip
+	pip install Cython
+	# And for good measure
+	pip install numpy
+	pip install h5py
 test: #after 'install'
 	${MAKE} -C ${FALCON_WORKSPACE}/FALCON-examples test
 # 'clean' operates on the repo dirs, not necessarily fc_env.
