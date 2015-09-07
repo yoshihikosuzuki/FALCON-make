@@ -1,6 +1,8 @@
 FALCON_WORKSPACE?=..
 FALCON_PREFIX?=../fc_env
 VDIR:=${FALCON_PREFIX}
+export CC=gcc
+export CXX=g++
 
 install: build
 	# There is a race-condition when installing python, se we serialize.
