@@ -7,11 +7,11 @@ export CXX=g++
 install: build
 	# There is a race-condition when installing python, se we serialize.
 	which python
-	cd ${FALCON_WORKSPACE}/pypeFLOW; python setup.py install
+	cd ${FALCON_WORKSPACE}/pypeFLOW; pip install -e .
 	python -c 'import pypeflow.common; print pypeflow.common'
-	cd ${FALCON_WORKSPACE}/FALCON; python setup.py install
+	cd ${FALCON_WORKSPACE}/FALCON; pip install -e .
 	python -c 'import falcon_kit; print falcon_kit.falcon'
-	cd ${FALCON_WORKSPACE}/DAZZ_DB; ln -sf $$PWD/DBrm $$PWD/DBshow $$PWD/DBsplit $$PWD/DBstats $$PWD/fasta2DB ${VDIR}/bin/
+	cd ${FALCON_WORKSPACE}/DAZZ_DB; ln -sf $$PWD/DBrm $$PWD/DBshow $$PWD/DBsplit $$PWD/DBstats $$PWD/fasta2DB $$PWD/DBdust ${VDIR}/bin/
 	cd ${FALCON_WORKSPACE}/DALIGNER; ln -sf $$PWD/daligner $$PWD/daligner_p $$PWD/DB2Falcon $$PWD/HPCdaligner $$PWD/LA4Falcon $$PWD/LAmerge $$PWD/LAsort $$PWD/LAcat $$PWD/LAshow  ${VDIR}/bin
 build: build-DAZZ_DB build-DALIGNER build-FALCON build-pypeFLOW
 build-DAZZ_DB:
