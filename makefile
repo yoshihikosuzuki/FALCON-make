@@ -13,7 +13,7 @@ install: build
 	cd ${FALCON_WORKSPACE}/FALCON; pip install -e .
 	python -c 'import falcon_kit; print falcon_kit.falcon'
 symlink:
-	cd ${FALCON_WORKSPACE}/DAZZ_DB; ln -sf $$PWD/DBrm $$PWD/DBshow $$PWD/DBsplit $$PWD/DBstats $$PWD/DBdust $$PWD/DBdump $$PWD/fasta2DB $$PWD/rangen ${VDIR}/bin/
+	cd ${FALCON_WORKSPACE}/DAZZ_DB; ln -sf $$PWD/DBrm $$PWD/DBshow $$PWD/DBsplit $$PWD/DBstats $$PWD/DBdust $$PWD/DBdump $$PWD/fasta2DB $$PWD/DB2fasta $$PWD/rangen ${VDIR}/bin/
 	cd ${FALCON_WORKSPACE}/DALIGNER; ln -sf $$PWD/daligner $$PWD/daligner_p $$PWD/DB2Falcon $$PWD/HPC.daligner $$PWD/LA4Falcon $$PWD/LAmerge $$PWD/LAsort $$PWD/LAcat $$PWD/LAshow $$PWD/LAdump $$PWD/LAcheck $$PWD/LAindex  ${VDIR}/bin
 build: build-DAZZ_DB build-DALIGNER build-FALCON build-pypeFLOW
 build-DAZZ_DB:
