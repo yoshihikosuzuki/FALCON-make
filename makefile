@@ -15,7 +15,7 @@ install-pypeFLOW:
 	which python
 	cd ${FALCON_WORKSPACE}/pypeFLOW; pip install -e .
 	python -c 'import pypeflow.common; print pypeflow.common'
-install-FALCON:
+install-FALCON: install-pypeFLOW
 	cd ${FALCON_WORKSPACE}/FALCON; pip install -e .
 	python -c 'import falcon_kit; print falcon_kit.falcon'
 bootstrap:
