@@ -4,36 +4,25 @@ VDIR:=${FALCON_PREFIX}
 export CC=gcc
 export CXX=g++
 
-install: build
-	${MAKE} symlink
-	# There is a race-condition when installing python, so we serialize.
+install: install-DAZZ_DB install-DALIGNER install-pypeFLOW install-FALCON
+install-DAZZ_DB:
+	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB
+	cd ${FALCON_WORKSPACE}/DAZZ_DB; ln -sf $$PWD/DBrm $$PWD/DBshow $$PWD/DBsplit $$PWD/DBstats $$PWD/DBdust $$PWD/DBdump $$PWD/fasta2DB $$PWD/DB2fasta $$PWD/rangen ${VDIR}/bin/
+install-DALIGNER: install-DAZZ_DB
+	${MAKE} -C ${FALCON_WORKSPACE}/DALIGNER
+	cd ${FALCON_WORKSPACE}/DALIGNER; ln -sf $$PWD/daligner $$PWD/daligner_p $$PWD/DB2Falcon $$PWD/HPC.daligner $$PWD/LA4Falcon $$PWD/LAmerge $$PWD/LAsort $$PWD/LAcat $$PWD/LAshow $$PWD/LAdump $$PWD/LAcheck $$PWD/LAindex  ${VDIR}/bin
+install-pypeFLOW:
 	which python
 	cd ${FALCON_WORKSPACE}/pypeFLOW; pip install -e .
 	python -c 'import pypeflow.common; print pypeflow.common'
+install-FALCON:
 	cd ${FALCON_WORKSPACE}/FALCON; pip install -e .
 	python -c 'import falcon_kit; print falcon_kit.falcon'
-symlink:
-	cd ${FALCON_WORKSPACE}/DAZZ_DB; ln -sf $$PWD/DBrm $$PWD/DBshow $$PWD/DBsplit $$PWD/DBstats $$PWD/DBdust $$PWD/DBdump $$PWD/fasta2DB $$PWD/DB2fasta $$PWD/rangen ${VDIR}/bin/
-	cd ${FALCON_WORKSPACE}/DALIGNER; ln -sf $$PWD/daligner $$PWD/daligner_p $$PWD/DB2Falcon $$PWD/HPC.daligner $$PWD/LA4Falcon $$PWD/LAmerge $$PWD/LAsort $$PWD/LAcat $$PWD/LAshow $$PWD/LAdump $$PWD/LAcheck $$PWD/LAindex  ${VDIR}/bin
-build: build-DAZZ_DB build-DALIGNER build-FALCON build-pypeFLOW
-build-DAZZ_DB:
-	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB
-build-DALIGNER: build-DAZZ_DB
-	${MAKE} -C ${FALCON_WORKSPACE}/DALIGNER
-build-FALCON:
-	cd ${FALCON_WORKSPACE}/FALCON; python setup.py build
-build-pypeFLOW:
-	cd ${FALCON_WORKSPACE}/pypeFLOW; python setup.py build
-develop: build-DAZZ_DB build-DALIGNER
-	${MAKE} symlink
-	cd ${FALCON_WORKSPACE}/pypeFLOW; python setup.py develop
-	${MAKE} install-FALCON
-	cd ${FALCON_WORKSPACE}/pbcommand; pip install -e .
-	cd ${FALCON_WORKSPACE}/pbsmrtpipe; pip install -e .
-	cd ${FALCON_WORKSPACE}/FALCON-pbsmrtpipe; python setup.py develop
 bootstrap:
 	pip install --upgrade pip
 	pip install Cython
+	cd ${FALCON_WORKSPACE}/pbcommand; pip install -e .
+	cd ${FALCON_WORKSPACE}/pbsmrtpipe; pip install -e .
 	# And for good measure
 	pip install numpy
 	pip install h5py
