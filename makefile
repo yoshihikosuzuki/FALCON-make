@@ -6,11 +6,14 @@ export CXX=g++
 
 install: install-DAZZ_DB install-DALIGNER install-pypeFLOW install-FALCON
 install-DAZZ_DB:
-	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB
-	cd ${FALCON_WORKSPACE}/DAZZ_DB; ln -sf $$PWD/DBrm $$PWD/DBshow $$PWD/DBsplit $$PWD/DBstats $$PWD/DBdust $$PWD/DBdump $$PWD/fasta2DB $$PWD/DB2fasta $$PWD/rangen ${VDIR}/bin/
+	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB all
+	PREFIX=${VDIR} ${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB symlink
 install-DALIGNER: install-DAZZ_DB
-	${MAKE} -C ${FALCON_WORKSPACE}/DALIGNER
-	cd ${FALCON_WORKSPACE}/DALIGNER; ln -sf $$PWD/daligner $$PWD/daligner_p $$PWD/DB2Falcon $$PWD/HPC.daligner $$PWD/LA4Falcon $$PWD/LAmerge $$PWD/LAsort $$PWD/LAcat $$PWD/LAshow $$PWD/LAdump $$PWD/LAcheck $$PWD/LAindex  ${VDIR}/bin
+	${MAKE} -C ${FALCON_WORKSPACE}/DALIGNER all
+	PREFIX=${VDIR} ${MAKE} -C ${FALCON_WORKSPACE}/DALIGNER symlink
+install-DAMASKER:
+	${MAKE} -C ${FALCON_WORKSPACE}/DAMASKER all
+	PREFIX=${VDIR} ${MAKE} -C ${FALCON_WORKSPACE}/DAMASKER symlink
 install-pypeFLOW:
 	which python
 	cd ${FALCON_WORKSPACE}/pypeFLOW; pip install -e .
