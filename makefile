@@ -4,7 +4,7 @@ VDIR:=${FALCON_PREFIX}
 export CC=gcc
 export CXX=g++
 
-install: install-DAZZ_DB install-DALIGNER install-pypeFLOW install-FALCON
+install: install-DAZZ_DB install-DALIGNER install-DAMASKER install-pypeFLOW install-FALCON
 install-DAZZ_DB:
 	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB all
 	PREFIX=${VDIR} ${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB symlink
