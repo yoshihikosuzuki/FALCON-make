@@ -1,13 +1,15 @@
 FALCON_WORKSPACE?=..
 export CC=gcc
 export CXX=g++
-export PYTHONUSERBASE?=../fc_env
-FALCON_PREFIX?=${PYTHONUSERBASE}
-VDIR:=${FALCON_PREFIX}
+#export PYTHONUSERBASE?=../fc_env
+export PYTHONUSERBASE?=$(shell python -c 'import site; print site.USER_BASE')
+export PATH:=${PYTHONUSERBASE}/bin:${PATH}
+PREFIX:=${PYTHONUSERBASE}
+VDIR:=${PREFIX}
 
-${FALCON_PREFIX}/bin:
+${PREFIX}/bin:
 	mkdir -p $@
-install: install-DAZZ_DB install-DALIGNER install-DAMASKER install-pypeFLOW install-FALCON | ${FALCON_PREFIX}/bin
+install: install-DAZZ_DB install-DALIGNER install-DAMASKER install-pypeFLOW install-FALCON | ${PREFIX}/bin
 install-DAZZ_DB:
 	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB all
 	PREFIX=${VDIR} ${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB symlink
