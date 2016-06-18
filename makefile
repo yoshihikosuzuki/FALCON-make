@@ -27,9 +27,10 @@ install-FALCON: install-pypeFLOW
 bootstrap:
 	echo ${PYTHONUSERBASE}
 	python -c 'import site; print site.USER_BASE'
+	which pip || python get-pip.py --user
 	pip install --user --upgrade pip
-	pip install --user Cython
 extra:
+	pip install --user Cython
 	pip install --user numpy
 	pip install --user h5py
 	cd ${FALCON_WORKSPACE}/pbcommand; pip install --user --edit .
