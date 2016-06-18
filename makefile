@@ -9,7 +9,7 @@ VDIR:=${PREFIX}
 
 ${PREFIX}/bin:
 	mkdir -p $@
-install: install-DAZZ_DB install-DALIGNER install-DAMASKER install-pypeFLOW install-FALCON | ${PREFIX}/bin
+install: install-DAZZ_DB install-DALIGNER install-DAMASKER install-pypeFLOW install-FALCON install-git-sym| ${PREFIX}/bin
 install-DAZZ_DB:
 	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB all
 	PREFIX=${VDIR} ${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB symlink
@@ -26,11 +26,16 @@ install-pypeFLOW:
 install-FALCON: install-pypeFLOW
 	cd ${FALCON_WORKSPACE}/FALCON; pip install -v --user --edit .
 	python -c 'import falcon_kit; print falcon_kit.falcon'
+install-git-sym:
+	ln -sf $(abspath ${FALCON_WORKSPACE}/git-sym/git-sym) ${PYTHONUSERBASE}/bin/git-sym
 bootstrap:
 	echo ${PYTHONUSERBASE}
 	python -c 'import site; print site.USER_BASE'
 	which pip || python get-pip.py --user
 	pip install --user --upgrade pip
+check:
+	which python
+	which pip
 extra:
 	pip install --user Cython
 	pip install --user numpy
