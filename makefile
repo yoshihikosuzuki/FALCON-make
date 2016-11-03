@@ -20,7 +20,7 @@ all: checklist
 checklist:
 	@if [ -z "$${FALCON_PREFIX}" ]; then echo 'Error: FALCON_PREFIX is not set'; exit 1; fi
 	@if [ ! -e "$${FALCON_PREFIX}/bin" ] ; then echo 'Error: directory FALCON_PREFIX/bin (${FALCON_PREFIX}/bin) does not exist'; exit 1; fi
-install: install-DAZZ_DB install-DALIGNER install-DAMASKER install-pypeFLOW install-FALCON install-git-sym
+install: install-DAZZ_DB install-DALIGNER install-DAMASKER install-DEXTRACTOR install-pypeFLOW install-FALCON install-git-sym
 install-DAZZ_DB:
 	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB all
 	PREFIX=${FALCON_PREFIX} ${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB ${FALCON_INSTALL_RULE}
@@ -30,6 +30,9 @@ install-DALIGNER: install-DAZZ_DB
 install-DAMASKER:
 	${MAKE} -C ${FALCON_WORKSPACE}/DAMASKER all
 	PREFIX=${FALCON_PREFIX} ${MAKE} -C ${FALCON_WORKSPACE}/DAMASKER ${FALCON_INSTALL_RULE}
+install-DEXTRACTOR:
+	${MAKE} -C ${FALCON_WORKSPACE}/DEXTRACTOR all
+	PREFIX=${FALCON_PREFIX} ${MAKE} -C ${FALCON_WORKSPACE}/DEXTRACTOR ${FALCON_INSTALL_RULE}
 install-pypeFLOW:
 	cd ${FALCON_WORKSPACE}/pypeFLOW; pip uninstall -v .; pip install -v ${FALCON_PIP_USER} ${FALCON_PIP_EDIT} .
 install-FALCON: install-pypeFLOW
