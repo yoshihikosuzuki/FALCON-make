@@ -53,7 +53,7 @@ show:
 	echo "FALCON_PIP_EDIT=${FALCON_PIP_EDIT}"
 	echo "FALCON_PIP_USER=${FALCON_PIP_USER}"
 check:
-	python -c 'import pypeflow.common; print pypeflow.common'
+	python -c 'import pypeflow.simple_pwatcher_bridge; print pypeflow.simple_pwatcher_bridge'
 	python -c 'import falcon_kit; print falcon_kit.falcon'
 extra:
 	pip install ${FALCON_PIP_USER} Cython
