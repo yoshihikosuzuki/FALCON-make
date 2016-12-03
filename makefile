@@ -37,6 +37,8 @@ install-pypeFLOW:
 	cd ${FALCON_WORKSPACE}/pypeFLOW; pip uninstall -v .; pip install -v ${FALCON_PIP_USER} ${FALCON_PIP_EDIT} .
 install-FALCON: install-pypeFLOW
 	cd ${FALCON_WORKSPACE}/FALCON; pip uninstall -v .; pip install -v ${FALCON_PIP_USER} ${FALCON_PIP_EDIT} .
+install-FALCON_unzip: install-pypeFLOW
+	cd ${FALCON_WORKSPACE}/FALCON_unzip; pip uninstall -v .; pip install -v ${FALCON_PIP_USER} ${FALCON_PIP_EDIT} .
 install-git-sym:
 	# TODO: copy vs. symlink?
 	ln -sf $(abspath ${FALCON_WORKSPACE}/git-sym/git-sym) ${FALCON_PREFIX}/bin/git-sym
