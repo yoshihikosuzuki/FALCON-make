@@ -44,7 +44,7 @@ install-git-sym:
 	ln -sf $(abspath ${FALCON_WORKSPACE}/git-sym/git-sym) ${FALCON_PREFIX}/bin/git-sym
 install-minialign:
 	${MAKE} -C ${FALCON_WORKSPACE}/minialign all
-	PREFIX=${FALCON_PREFIX} ${MAKE} -C ${FALCON_WORKSPACE}/minialign ${FALCON_INSTALL_RULE}
+	PREFIX=${FALCON_PREFIX} ${MAKE} -C ${FALCON_WORKSPACE}/minialign install
 
 install-pip:
 	python -c 'import pip; print pip' || python get-pip.py ${FALCON_PIP_USER}
