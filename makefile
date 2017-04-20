@@ -20,7 +20,7 @@ all: checklist
 checklist:
 	@if [ -z "$${FALCON_PREFIX}" ]; then echo 'Error: FALCON_PREFIX is not set'; exit 1; fi
 	@if [ ! -e "$${FALCON_PREFIX}/bin" ] ; then echo 'Error: directory FALCON_PREFIX/bin (${FALCON_PREFIX}/bin) does not exist'; exit 1; fi
-install: install-DAZZ_DB install-DALIGNER install-DAMASKER install-DEXTRACTOR install-pypeFLOW install-FALCON install-git-sym
+install: install-DAZZ_DB install-DALIGNER install-DAMASKER install-DEXTRACTOR install-pypeFLOW install-FALCON install-git-sym install-minialign
 install-DAZZ_DB:
 	${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB all
 	PREFIX=${FALCON_PREFIX} ${MAKE} -C ${FALCON_WORKSPACE}/DAZZ_DB ${FALCON_INSTALL_RULE}
@@ -42,6 +42,9 @@ install-FALCON_unzip: install-pypeFLOW
 install-git-sym:
 	# TODO: copy vs. symlink?
 	ln -sf $(abspath ${FALCON_WORKSPACE}/git-sym/git-sym) ${FALCON_PREFIX}/bin/git-sym
+install-minialign:
+	${MAKE} -C ${FALCON_WORKSPACE}/minialign all
+	PREFIX=${FALCON_PREFIX} ${MAKE} -C ${FALCON_WORKSPACE}/minialign ${FALCON_INSTALL_RULE}
 
 install-pip:
 	python -c 'import pip; print pip' || python get-pip.py ${FALCON_PIP_USER}
@@ -71,3 +74,4 @@ clean:
 	cd ${FALCON_WORKSPACE}/DAMASKER; ${MAKE} clean
 	cd ${FALCON_WORKSPACE}/pypeFLOW; python setup.py clean; rm -rf build/ dist/
 	cd ${FALCON_WORKSPACE}/FALCON; python setup.py clean; rm -rf build/ dist/
+	cd ${FALCON_WORKSPACE}/minialign; ${MAKE} clean
